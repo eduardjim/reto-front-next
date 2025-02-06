@@ -12,8 +12,8 @@ interface ProductDetailPageProps {
 
 // Componente de página de detalle del producto
 const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
-  // Espera a que se resuelva params
-  const { sku } = await params;
+  // Directly use params.sku without 'await'
+  const { sku } = params;
 
   let product: Product | null = null;
   let error: string | null = null;
