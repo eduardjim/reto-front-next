@@ -4,13 +4,7 @@ import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
 
-interface ProductDetailPageProps {
-  params: {
-    sku: string;
-  };
-}
-
-const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
+const ProductDetailPage = async ({ params }:any) => {
   const { sku } = params;
   let product: Product | null = null;
   let error: string | null = null;
