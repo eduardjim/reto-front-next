@@ -4,8 +4,13 @@ import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
 
-// Componente de página de detalle del producto
-const ProductDetailPage = async ({ params }: { params: { sku: string } }) => {
+interface ProductDetailPageProps {
+  params: {
+    sku: string;
+  };
+}
+
+const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
   const { sku } = params;
   let product: Product | null = null;
   let error: string | null = null;
