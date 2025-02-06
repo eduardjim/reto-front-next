@@ -4,17 +4,9 @@ import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
 
-interface ProductDetailPageProps {
-  params: {
-    sku: string;
-  };
-}
-
 // Componente de página de detalle del producto
-const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
-  // Directly use params.sku without 'await'
+const ProductDetailPage = async ({ params }: { params: { sku: string } }) => {
   const { sku } = params;
-
   let product: Product | null = null;
   let error: string | null = null;
 
