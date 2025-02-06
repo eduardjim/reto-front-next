@@ -65,10 +65,10 @@ const ProductDetailLayout: React.FC<ProductDetailLayoutProps> = ({ product }) =>
           <p>
           <span className='font-bold sans-serif'>Unidades disponibles:</span> {product.stock}
           </p>
-          <p>
+          <div>
           <span className='font-bold sans-serif text-[25px]'>Especificaciones:</span>
             {getSpecifications(product.specifications)}
-          </p>
+          </div>
           {/* Add specifications list here */}
         </CardContent>
       </Grid>
