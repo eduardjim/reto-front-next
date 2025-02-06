@@ -24,7 +24,8 @@ const ProductDetailPage = () => {
 const getInfo = async()=>{
   try {
     const productresponse = await fetchProduct(sku);
-    setProduct(productresponse);   
+    setProduct(productresponse);
+    setLoading(false);
   } catch (err: unknown) {
     if (err instanceof Error) {
       console.error("Error fetching product:", err.message);
