@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, CardContent, CardMedia, p } from '@mui/material';
+import { Grid, CardContent, CardMedia } from '@mui/material';
 import Link from 'next/link';
 import {Product} from '@/app/types';
 // Define the interface for the product object
