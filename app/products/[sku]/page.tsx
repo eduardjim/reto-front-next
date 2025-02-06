@@ -1,9 +1,9 @@
-// app/products/[sku]/page.tsx
 import { fetchProduct } from '../../utils/api';
 import ProductDetail from '../../components/ProductDetail'; // Asegúrate de que la ruta sea correcta
 import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
+
 interface ProductDetailPageProps {
   params: {
     sku: string;
@@ -20,17 +20,19 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
 
   try {
     product = await fetchProduct(sku);
-  } catch (err) {
-    error = 'No se pudo cargar el producto.';
+  } catch (err: any) {
+    console.error("Error fetching product:", err); // Log the error for debugging purposes
+    error = 'No se pudo cargar el producto.'; // Set a generic error message
   }
 
   return (
     <>
       {!error ? (
         <>
-          {product ? (<Container maxWidth="lg" style={{ marginTop: '16px' }}>            
-            <ProductDetail product={product} />
-          </Container>
+          {product ? (
+            <Container maxWidth="lg" style={{ marginTop: '16px' }}>
+              <ProductDetail product={product} />
+            </Container>
           ) : (
             <>
               <h1 className='font-bold sans-serif text-center text-8xl'>404</h1>
@@ -54,8 +56,6 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
           </Link>
         </>
       )}
-
-
     </>
   );
 };

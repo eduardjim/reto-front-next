@@ -4,6 +4,7 @@ import { fetchProducts } from './utils/api';
 import ProductList from './components/ProductList';
 import { Product } from './types';
 import { Container, TextField } from '@mui/material';
+
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
@@ -16,37 +17,30 @@ const Home = () => {
       const fetchedProducts: Product[] = await fetchProducts(searchTerm);
       if (fetchedProducts) {
         const searchTermLower = searchTerm.toLowerCase();
-        if(searchTerm!==''){
+        // Si searchTerm no está vacío, filtra los productos
+        if (searchTerm !== '') {
           const filterProducts = fetchedProducts.filter((prd) => {
             return (
-              prd.name.toLowerCase().includes(searchTermLower) || prd.sku.toString().includes(searchTermLower)
+              prd.name.toLowerCase().includes(searchTermLower) ||
+              prd.sku.toString().includes(searchTermLower)
             );
           });
-          if(filterProducts.length){
-            setProducts(filterProducts);
-          }else{
-            setProducts([]);
-          }
-        }else{
-          setProducts(fetchedProducts)
+          setProducts(filterProducts.length ? filterProducts : []);
+        } else {
+          // Si searchTerm está vacío, muestra todos los productos
+          setProducts(fetchedProducts);
         }
-        
         setLoading(false);
       }      
     };
 
-    if (searchTerm.trim() !== '') {
-      fetchData();
-    } else {
-      setProducts([]); // Limpiar productos si no hay término de búsqueda
-    }
-
+    fetchData();
   }, [searchTerm]);
 
   return (
     <div className="p-4">
       <Container maxWidth="lg" style={{ marginTop: '16px' }}>
-      <h1 className="text-3xl font-semibold font-sans text-center uppercase">Resultados de búsqueda</h1>
+        <h1 className="text-3xl font-semibold font-sans text-center uppercase">Resultados de búsqueda</h1>
         <TextField
           label="Buscar productos"
           variant="outlined"

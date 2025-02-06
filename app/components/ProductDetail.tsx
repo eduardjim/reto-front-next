@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, CardContent, CardMedia, Typography } from '@mui/material';
+import { Grid, CardContent, CardMedia, Typography } from '@mui/material';
 import Link from 'next/link';
 
 // Define the interface for the product object
@@ -11,7 +11,7 @@ interface Product {
   image: string;
   name: string;
   sku: string;
-  category: Category;
+  category: string;
   brand: string;
   price: number;
   specifications: [];
