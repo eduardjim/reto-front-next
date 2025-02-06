@@ -1,36 +1,39 @@
-import React from 'react';
+"use client"
+import React ,{useEffect, useState}from 'react';
 import { fetchProduct } from '../../utils/api';
 import ProductDetail from '../../components/ProductDetail'; // Asegúrate de que la ruta sea correcta
 import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
-
-interface ProductDetailPageProps {
-  params: {
-    sku: string;
-  };
-}
+import { useParams } from "next/navigation";
 
 // Componente de página de detalle del producto
 
-const ProductDetailPage : React.FC<ProductDetailPageProps> = async ({ params }) => {
+const ProductDetailPage = () => {
   // Directly use params.sku without 'await'
-  const { sku } = params;
-  let product: Product | null = null;
-  let error: string | null = null;
+  const params = useParams();
+  const sku = params?.sku as string;
+  const [product,setProduct] = useState<Product | null>(null);
+  const [error,setError] = useState<string | null>(null);
 
+  useEffect(()=>{
+    getInfo()
+  },[])
+  
+const getInfo = async()=>{
   try {
-    product = await fetchProduct(sku);
+    const productresponse = await fetchProduct(sku);
+    setProduct(productresponse);   
   } catch (err: unknown) {
     if (err instanceof Error) {
       console.error("Error fetching product:", err.message);
-      error = 'No se pudo cargar el producto.';
+      setError('No se pudo cargar el producto.')
     } else {
       console.error("Unknown error:", err);
-      error = 'No se pudo cargar el producto.';
+      setError('No se pudo cargar el producto.')
     }
   }
-
+}
   return (
     <>
       {!error ? (
