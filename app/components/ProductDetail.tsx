@@ -3,15 +3,11 @@ import { Grid, CardContent, CardMedia, Typography } from '@mui/material';
 import Link from 'next/link';
 
 // Define the interface for the product object
-interface Category {
-  name: string;
-}
-
 interface Product {
   image: string;
   name: string;
   sku: string;
-  category: string;
+  category: { name: string };
   brand: string;
   price: number;
   specifications: [];

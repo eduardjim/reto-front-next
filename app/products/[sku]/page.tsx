@@ -20,9 +20,14 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
 
   try {
     product = await fetchProduct(sku);
-  } catch (err: any) {
-    console.error("Error fetching product:", err); // Log the error for debugging purposes
-    error = 'No se pudo cargar el producto.'; // Set a generic error message
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error fetching product:", err.message);
+      error = 'No se pudo cargar el producto.';
+    } else {
+      console.error("Unknown error:", err);
+      error = 'No se pudo cargar el producto.';
+    }
   }
 
   return (
