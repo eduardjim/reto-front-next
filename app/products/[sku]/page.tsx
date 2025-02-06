@@ -14,6 +14,7 @@ const ProductDetailPage = () => {
   const params = useParams();
   const sku = params?.sku as string;
   const [product,setProduct] = useState<Product | null>(null);
+  const [loading,setLoading] = useState<boolean|null>(true);
   const [error,setError] = useState<string | null>(null);
 
   useEffect(()=>{
@@ -43,7 +44,8 @@ const getInfo = async()=>{
               <ProductDetail product={product} />
             </Container>
           ) : (
-            <>
+            loading?(<h1 className='font-bold sans-serif text-center text-lg'>Cargando...</h1>):(
+              <>
               <h1 className='font-bold sans-serif text-center text-8xl'>404</h1>
               <p className='sans-serif text-center text-lg'>El producto que buscas no existe en el catalogo</p>
               <Link href={`/`} style={{ textDecoration: 'none' }} className='mt-5 mr-auto ml-auto block text-center'>
@@ -52,6 +54,8 @@ const getInfo = async()=>{
                 </Button>
               </Link>
             </>
+            )
+            
           )}
         </>
       ) : (
