@@ -1,10 +1,20 @@
+import React from 'react';
 import { fetchProduct } from '../../utils/api';
 import ProductDetail from '../../components/ProductDetail'; // Asegúrate de que la ruta sea correcta
 import { Product } from '../../types';
 import { Button, Container } from '@mui/material';
 import Link from 'next/link';
 
-const ProductDetailPage = async ({ params }:any) => {
+interface ProductDetailPageProps {
+  params: {
+    sku: string;
+  };
+}
+
+// Componente de página de detalle del producto
+
+const ProductDetailPage : React.FC<ProductDetailPageProps> = async ({ params }) => {
+  // Directly use params.sku without 'await'
   const { sku } = params;
   let product: Product | null = null;
   let error: string | null = null;
